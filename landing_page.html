@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>30-Day Discipline System — Free PDF</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --dark: #0A0A0F;
+    --dark2: #13131A;
+    --dark3: #1C1C28;
+    --white: #F5F3EE;
+    --gray: #888888;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* NOISE TEXTURE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* GOLD LINE TOP */
+  .top-bar {
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    width: 100%;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px 40px;
+    text-align: center;
+    z-index: 1;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(ellipse, rgba(201,168,76,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 10vw, 72px);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+    animation: fadeUp 0.7s ease both;
+    animation-delay: 0.1s;
+  }
+
+  h1 span {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .subtitle {
+    font-size: clamp(15px, 4vw, 18px);
+    color: rgba(245,243,238,0.6);
+    font-weight: 300;
+    margin-top: 16px;
+    margin-bottom: 40px;
+    max-width: 400px;
+    line-height: 1.6;
+    animation: fadeUp 0.7s ease both;
+    animation-delay: 0.2s;
+  }
+
+  /* PDF PREVIEW CARD */
+  .pdf-card {
+    position: relative;
+    width: 200px;
+    height: 280px;
+    margin: 0 auto 40px;
+    animation: fadeUp 0.8s ease both;
+    animation-delay: 0.15s;
+  }
+
+  .pdf-card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(135deg, var(--gold), transparent 60%);
+    border-radius: 10px;
+    z-index: 0;
+  }
+
+  .pdf-inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background: var(--dark3);
+    border-radius: 9px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    overflow: hidden;
+  }
+
+  .pdf-inner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(201,168,76,0.12), transparent);
+  }
+
+  .pdf-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    position: relative;
+  }
+
+  .pdf-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    position: relative;
+  }
+
+  .pdf-title-small {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+    text-align: center;
+    padding: 0 16px;
+    position: relative;
+    line-height: 1.3;
+  }
+
+  .pdf-author {
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: relative;
+  }
+
+  /* STATS ROW */
+  .stats {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    margin-bottom: 40px;
+    animation: fadeUp 0.8s ease both;
+    animation-delay: 0.25s;
+  }
+
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* CTA BUTTON */
+  .cta-wrap {
+    animation: fadeUp 0.8s ease both;
+    animation-delay: 0.3s;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 18px 48px;
+    border-radius: 4px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 40px rgba(201,168,76,0.25);
+  }
+
+  .cta-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.4s;
+  }
+
+  .cta-btn:hover::before { left: 100%; }
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 50px rgba(201,168,76,0.4);
+  }
+  .cta-btn:active { transform: translateY(0); }
+
+  .cta-note {
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    margin-top: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 56px auto;
+  }
+
+  /* WHAT YOU GET */
+  .section {
+    position: relative;
+    z-index: 1;
+    padding: 0 24px 60px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .items {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .item {
+    background: var(--dark2);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 8px;
+    padding: 20px 22px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .item.visible { opacity: 1; transform: translateY(0); }
+
+  .item-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gold);
+    opacity: 0.4;
+    line-height: 1;
+    flex-shrink: 0;
+    width: 28px;
+  }
+
+  .item-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .item-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  /* FINAL CTA */
+  .final-cta {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0 24px 80px;
+  }
+
+  .final-cta h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 7vw, 44px);
+    font-weight: 900;
+    margin-bottom: 12px;
+    line-height: 1.1;
+  }
+
+  .final-cta h2 em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .final-cta p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 32px;
+    font-weight: 300;
+  }
+
+  .footer-note {
+    font-size: 11px;
+    color: rgba(255,255,255,0.2);
+    margin-top: 48px;
+    letter-spacing: 1px;
+  }
+
+  /* PULSE ANIMATION ON BUTTON */
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 40px rgba(201,168,76,0.25); }
+    50% { box-shadow: 0 0 60px rgba(201,168,76,0.45); }
+  }
+
+  .cta-btn { animation: pulse 2.5s ease infinite; }
+  .cta-btn:hover { animation: none; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .pdf-card { animation: fadeUp 0.8s ease both, float 4s ease-in-out 1s infinite; }
+</style>
+</head>
+<body>
+
+<div class="top-bar"></div>
+
+<section class="hero">
+  <div class="tag">@self.help.x &nbsp;|&nbsp; Free Download</div>
+
+  <div class="pdf-card">
+    <div class="pdf-inner">
+      <div class="pdf-num">30</div>
+      <div class="pdf-label">Day System</div>
+      <div class="pdf-title-small">Discipline<br>System</div>
+      <div class="pdf-author">Quiet Progress</div>
+    </div>
+  </div>
+
+  <h1>Become <span>Unrecognizable</span><br>in 30 Days</h1>
+  <p class="subtitle">The free PDF system used to build discipline, identity, and momentum — starting tomorrow morning.</p>
+
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-num">30</span>
+      <span class="stat-label">Days</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">15</span>
+      <span class="stat-label">Pages</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">100%</span>
+      <span class="stat-label">Free</span>
+    </div>
+  </div>
+
+  <div class="cta-wrap">
+    <a href="https://authenticateapp.online/cl/i/l7mqgd" class="cta-btn">Get Free PDF Now</a>
+    <p class="cta-note">Complete 1 quick step to unlock — takes 30 seconds</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section">
+  <div class="section-label">What's inside</div>
+  <div class="items">
+    <div class="item">
+      <div class="item-num">01</div>
+      <div>
+        <div class="item-title">The 3 Laws of Unbreakable Discipline</div>
+        <div class="item-desc">Why willpower fails and what actually works long-term.</div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-num">02</div>
+      <div>
+        <div class="item-title">4 Weeks — Day by Day Plan</div>
+        <div class="item-desc">Exact actions for each day. No guessing. Just follow.</div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-num">03</div>
+      <div>
+        <div class="item-title">Identity Rebuilding System</div>
+        <div class="item-desc">Stop trying harder. Start becoming someone different.</div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-num">04</div>
+      <div>
+        <div class="item-title">Emergency Protocol</div>
+        <div class="item-desc">What to do on the day you want to quit — step by step.</div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-num">05</div>
+      <div>
+        <div class="item-title">Daily Non-Negotiables</div>
+        <div class="item-desc">5 things that happen every day. No exceptions.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="final-cta">
+  <h2>Ready to become<br><em>unrecognizable?</em></h2>
+  <p>It's free. It takes 30 seconds to unlock.</p>
+  <a href="https://authenticateapp.online/cl/i/l7mqgd" class="cta-btn">Get My Free PDF</a>
+  <p class="footer-note">@self.help.x on TikTok &nbsp;·&nbsp; 30-Day Discipline System</p>
+</section>
+
+<script>
+  const items = document.querySelectorAll('.item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 100);
+      }
+    });
+  }, { threshold: 0.1 });
+  items.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
